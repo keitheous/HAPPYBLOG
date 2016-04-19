@@ -2,6 +2,9 @@ require 'sinatra'
 require 'sinatra/reloader'
 require './db_config'
 require './models/post'
+require './models/user'
+require './models/comment'
+require './models/tag'
 # filter to close connection after
 after do
   ActiveRecord::Base.connection.close
@@ -18,20 +21,15 @@ end
 # renders form - method post - redirected
 # ========================
 # ========================
-# ========================
-# ========================
-# ========================
-# ========================
-# ========================
-# ========================
 get '/posts/new' do
+  @user = User.all
   erb :new
 end
 
 post '/posts' do
   @post = Post.new
   @post.title = params[:title]
-  @post.name = params[:name]
+  # @post.name = params[:name]
   @post.body = params[:body]
   @post.save
   redirect to '/posts'
@@ -62,11 +60,13 @@ end
 # ========================
 get '/posts' do
   @posts = Post.all
+  @users = User.all
   erb :show
 end
 
 get '/posts/:id' do
   @post = Post.find(params[:id])
+  @user = User.find(@post.user_id)
   erb :showsingle
 end
 
@@ -95,4 +95,48 @@ delete '/delete/:id' do
   redirect to '/posts'
 end
 # ========================
+
+
 # ========================
+# ========================
+# USER FUNCTION ==========
+# ========================
+# ========================
+# User Login
+get '/user/login' do
+  erb :login
+end
+
+post '/user' do
+  # if user by email
+  user = User.find_by(email: params[:email])
+  # if user email and password exist - log in, else do nothing
+  if user.authenticate(params[:password])
+    redirect to '/posts'
+  else
+    redirect to '/'
+  end
+end
+
+#User Signup
+get '/user/signup' do
+  erb :signup
+end
+
+post '/user/new' do
+  user = User.new
+  user.name = params[:name]
+  user.email = params[:email]
+  user.password = params[:password]
+  user.save
+  redirect to '/posts'
+end
+
+#User Edit
+# get '/user/profile' do
+#   @user = User.all
+#   erb :profileEdit
+# end
+
+
+#User Log out
