@@ -1,0 +1,12 @@
+<h1> Displaying all Posts: </h1>
+</form><form action="/posts/new">
+<button> New Post </button>
+</form>
+<br>
+<% @posts.each do |post| %>
+  <p><a href="/posts/<%= post.id %>"><b> Post Title : <%= post.title %></b></a></p>
+  <p> Username: <%= post.name %></p>
+  <p> Post: </p>
+  <p> <%= post.body %></p>
+  <br>
+<% end %>
