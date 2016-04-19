@@ -5,7 +5,20 @@ require './models/post'
 require './models/user'
 require './models/comment'
 require './models/tag'
+enable :sessions
 # filter to close connection after
+helpers do
+
+  def current_user
+    User.find_by(id: session[:user_id])
+  end
+
+  def logged_in?
+    !!current_user
+  end
+
+end
+
 after do
   ActiveRecord::Base.connection.close
 end
@@ -22,14 +35,13 @@ end
 # ========================
 # ========================
 get '/posts/new' do
-  @user = User.all
   erb :new
 end
 
 post '/posts' do
   @post = Post.new
   @post.title = params[:title]
-  # @post.name = params[:name]
+  @post.name = params[:name]
   @post.body = params[:body]
   @post.save
   redirect to '/posts'
@@ -79,14 +91,6 @@ get '/delete/:id' do
   erb :delete
 end
 
-def destroy
-    @status_update = StatusUpdate.find(params[:id])
-    if @status_update.present?
-      @status_update.destroy
-    end
-    redirect_to root_url
-end
-
 delete '/delete/:id' do
   @post = Post.find(params[:id])
   if @post.present?
@@ -110,8 +114,10 @@ end
 post '/user' do
   # if user by email
   user = User.find_by(email: params[:email])
+  puts user
   # if user email and password exist - log in, else do nothing
-  if user.authenticate(params[:password])
+  if user && user.authenticate(params[:password])
+    session[:user_id] = user.id
     redirect to '/posts'
   else
     redirect to '/'
@@ -140,3 +146,7 @@ end
 
 
 #User Log out
+get '/user/logout' do
+  session[:user_id] = nil
+  redirect to '/'
+end

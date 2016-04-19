@@ -1,16 +1,36 @@
-<h1> Displaying all Posts: </h1>
-</form><form action="/posts/new">
-<button> New Post </button>
-</form>
-<br>
-<% @posts.each do |post| %>
-  <p><a href="/posts/<%= post.id %>"><b> Post Title : <%= post.title %></b></a></p>
-   <% @users.each do |user| %>
-     <% if user.id == post.user_id%>
-     <p> Name: <%= user.name %></p>
-     <% end %>
-   <% end %>
-  <p> Post: </p>
-  <p> <%= post.body %></p>
-  <br>
-<% end %>
+<div class="show">
+  <div class="">
+    <% if logged_in? %>
+      <form action="/user/logout" method="delete">
+        <button> Log Out </button>
+      </form>
+      <form action="/posts/new">
+        <button> New Post </button>
+      </form>
+    <% end %>
+  </div>
+  <div class="contents">
+    <div class="side-nav">
+      <label for="">Tags: </label>
+      <input type = "text" name="title" value=""><br>
+
+    </div>
+
+    <div class="thumbies">
+      <h2 class="smaller_titles"> Blog Entries: </h3>
+      <br>
+      <% @posts.each do |post| %>
+        <p><a href="/posts/<%= post.id %>"><b> Post Title : <%= post.title %></b></a></p>
+         <% @users.each do |user| %>
+           <% if user.id == post.user_id%>
+           <p> Name: <%= user.name %></p>
+           <% end %>
+         <% end %>
+        <p> Post: </p>
+        <p> <%= post.body %></p>
+        <br>
+      <% end %>
+    </div>
+  </div>
+
+</div>
