@@ -1,11 +1,13 @@
 <div class="show_single_content">
   <h1> <%= @post.title %> </h1>
   <div class="show_single_content_subtitle">
-    <span id="written_by"> Written by: <%= @user.name %></span>
+    <span id="written_by"> Written by: <%= @poster.name %></span>
 
-    <% if @post.user_id == current_user.id %>
-      <span id="float_right_button"><a href="/delete/<%= @post.id %>"> Delete </a></span>
-      <span id="float_right_button"><a href="/posts/<%= @post.id %>/edit"> Edit </a></span>
+    <% if logged_in? %>
+      <% if @post.user_id == @current.id %>
+        <span id="float_right_button"><a href="/delete/<%= @post.id %>"> Delete </a></span>
+        <span id="float_right_button"><a href="/posts/<%= @post.id %>/edit"> Edit </a></span>
+      <% end %>
     <% end %>
   </div>
   <div class="show_single_content_body">

@@ -35,17 +35,25 @@ end
 # ========================
 # ========================
 get '/posts/new' do
-  erb :new
+  if !(logged_in?)
+    redirect to '/user/login'
+  else
+    erb :new
+  end
 end
 
 post '/posts' do
-  @post = Post.new
-  @post.title = params[:title]
-  @post.user_id = current_user.id
-  # @post.name  = current_user.id
-  @post.body = params[:body]
-  @post.save
-  redirect to '/posts'
+  if !(logged_in?)
+    redirect to '/user/login'
+  else
+    @post = Post.new
+    @post.title = params[:title]
+    @post.user_id = current_user.id
+    # @post.name  = current_user.id
+    @post.body = params[:body]
+    @post.save
+    redirect to '/posts'
+  end
 end
 
 # ========================
@@ -55,20 +63,38 @@ end
 # ========================
 get '/posts/:id/edit' do
   @post = Post.find(params[:id])
-
-  redirect to '/' if @post.user_id != current_user.id
+  if !(logged_in?)
+    redirect to '/user/login'
+  elsif @post.user_id != current_user.id
+    redirect to '/posts'
+  else
   erb :edit
+  end
 end
 
 patch '/posts/:id' do
   @post = Post.find(params[:id])
-  redirect to '/' if @post.user_id != current_user.id
-
-  @post.title = params[:title]
-  @post.body = params[:body]
-  @post.save
-  redirect to '/posts'
+  if !(logged_in?)
+    redirect to '/user/login'
+  elsif @post.user_id != current_user.id
+    redirect to '/posts'
+  else
+    @post.title = params[:title]
+    @post.body = params[:body]
+    @post.save
+    redirect to '/posts'
+  end
 end
+
+# patch '/posts/:id' do
+#   @post = Post.find(params[:id])
+#   redirect to '/' if @post.user_id != current_user.id
+#
+#   @post.title = params[:title]
+#   @post.body = params[:body]
+#   @post.save
+#   redirect to '/posts'
+# end
 
 # ========================
 # ========================
@@ -83,7 +109,8 @@ end
 
 get '/posts/:id' do
   @post = Post.find(params[:id])
-  @user = User.find(@post.user_id)
+  @poster = User.find(@post.user_id)
+  @current = current_user
   erb :showsingle
 end
 
