@@ -21,20 +21,18 @@
     </div>
 
     <div class="thumbies">
-      <h2 class="smaller_titles"> Story Board : </h3>
-      <br>
+      <h2> Story Board : </h2>
+      <div class="tiles">
       <% @posts.each do |post| %>
-        <p><a href="/posts/<%= post.id %>"><b> Post Title : <%= post.title %></b></a></p>
+        <p><a href="/posts/<%= post.id %>"><%= post.title %></a></p>
          <% @users.each do |user| %>
            <% if user.id == post.user_id%>
            <p> Name: <%= user.name %></p>
            <% end %>
          <% end %>
-        <p> Post: </p>
         <p> <%= post.body %></p>
-        <br>
       <% end %>
+      </div>
     </div>
-  </div>
 
 </div>

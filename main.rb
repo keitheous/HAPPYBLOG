@@ -41,7 +41,8 @@ end
 post '/posts' do
   @post = Post.new
   @post.title = params[:title]
-  @post.name = params[:name]
+  @post.user_id = current_user.id
+  # @post.name  = current_user.id
   @post.body = params[:body]
   @post.save
   redirect to '/posts'
@@ -138,8 +139,11 @@ post '/user/new' do
   user.name = params[:name]
   user.email = params[:email]
   user.password = params[:password]
-  user.save
-  redirect to '/posts'
+  if user.save
+    redirect to '/posts'
+  else
+    erb :signup
+  end
 end
 
 #User Edit

@@ -164,11 +164,62 @@ input[type="textarea"] , input[type="password"] {
   border-radius: none;
 }
 
+.show_single_content{
+  background-image: url(/stylesheets/nbackgroundposts.jpeg);
+  color: white;
+  background-color: pink;
+  padding-left: 5%;
+  padding-right: 30%;
+  padding-bottom: 30px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  height:600px;
+}
+
+.show_single_content h1 {
+  margin: 0;
+  font-size: 60px;
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.show_single_content #written_by {
+  float: left;
+  display: inline-block;
+}
+.show_single_content #float_right_button {
+  float: right;
+  display: inline-block;
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+  padding: .6rem 3.5rem;
+  color: white;
+  font-size:15px;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: left;
+  background: rgba(128, 128, 128, 0.8);
+  margin: 0 0.8rem;
+}
+.show_single_content #float_right_button a {
+  color: white;
+  text-decoration: none;
+}
+.show_single_content_body{
+  text-align: justify;
+  font-size: 800;
+  padding-top: 30px;
+  display: block;
+}
+
 /*new and edit styles*/
 .borang {
   padding-left: 50px;
   color: white;
-  /*background-color: pink;*/
+  background-color: pink;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
