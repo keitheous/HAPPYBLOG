@@ -1,18 +1,20 @@
-<h1> Displaying just one post </h1>
-<p><b> Title : <%= @post.title %></b></p>
-<p><b> Username:</b> <%= @user.name %></p>
-<p><b> Post: </b></p>
-<p> <%= @post.body %></p>
+<div class="borang">
+  <h2> <%= @post.title %> </h2>
+  <p> Written by: <%= @user.name %></p>
+  <p> <%= @post.body %></p>
 
-<!-- <a href="/posts"> << Back </a> -->
+  <!-- <a href="/posts"> << Back </a> -->
 
-<form action="/posts">
-<button> << Back </button>
-</form>
-<!-- <a href="/posts/<%= @post.id %>/edit"> Edit </a> -->
-<form action="/posts/<%= @post.id %>/edit">
-<button> Edit </button>
+  <form action="/posts">
+  <button class="button_1"> Story Board </button>
+  </form>
+  <!-- <a href="/posts/<%= @post.id %>/edit"> Edit </a> -->
 
-</form><form action="/delete/<%= @post.id %>">
-<button> Delete </button>
-</form>
+  <% if @post.user_id == current_user.id %>
+  <form action="/posts/<%= @post.id %>/edit">
+  <button> Edit </button>
+  </form><form action="/delete/<%= @post.id %>">
+  <button> Delete </button>
+  </form>
+  <% end %>
+</div>

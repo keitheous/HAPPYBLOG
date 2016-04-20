@@ -54,11 +54,15 @@ end
 # ========================
 get '/posts/:id/edit' do
   @post = Post.find(params[:id])
+
+  redirect to '/' if @post.user_id != current_user.id
   erb :edit
 end
 
 patch '/posts/:id' do
   @post = Post.find(params[:id])
+  redirect to '/' if @post.user_id != current_user.id
+
   @post.title = params[:title]
   @post.body = params[:body]
   @post.save
@@ -120,7 +124,7 @@ post '/user' do
     session[:user_id] = user.id
     redirect to '/posts'
   else
-    redirect to '/'
+    erb :login
   end
 end
 

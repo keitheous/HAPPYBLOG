@@ -9,11 +9,26 @@
 <body>
   <div class="header">
     <p id="logo">Super<span>Duper</span>Happy</p>
+    <p id="user">
+
+    <% if logged_in? %>
+      <%= current_user.name %>
+    <% else %>
+    <% end %>
+
+    </p>
     <nav>
       <a href="/">Home</a>
       <a href="/posts">Stories</a>
       <a href="#">Contact</a>
-      <a href="/user/login">Login</a>
+      <% if !logged_in? %>
+        <a href="/user/login">Login</a>
+      <% else %>
+        <a href="/user/logout">Logout</a>
+
+
+      <% end %>
+
     </nav>
   </div>
   <%= yield %>

@@ -1,23 +1,27 @@
 <div class="show">
   <div class="">
-    <% if logged_in? %>
-      <form action="/user/logout" method="delete">
-        <button> Log Out </button>
-      </form>
-      <form action="/posts/new">
-        <button> New Post </button>
-      </form>
-    <% end %>
   </div>
   <div class="contents">
     <div class="side-nav">
-      <label for="">Tags: </label>
-      <input type = "text" name="title" value=""><br>
-
+      <div class="side-nav-choice">
+        <% if logged_in? %>
+          <form action="/posts/new">
+            <button class="button_1"> New Post </button>
+          </form>
+        <% else %>
+        <form action="/user/login">
+          <button class="button_1"> Log In </button>
+        </form>
+        <% end %>
+      </div>
+      <div class="side-nav-choice">
+        <label for="">Tags: </label>
+        <input type = "text" name="title" value=""><br>
+      </div>
     </div>
 
     <div class="thumbies">
-      <h2 class="smaller_titles"> Blog Entries: </h3>
+      <h2 class="smaller_titles"> Story Board : </h3>
       <br>
       <% @posts.each do |post| %>
         <p><a href="/posts/<%= post.id %>"><b> Post Title : <%= post.title %></b></a></p>

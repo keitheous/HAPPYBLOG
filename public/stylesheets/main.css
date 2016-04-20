@@ -15,6 +15,7 @@ body{
 }
 .header #logo {
   padding-left: 10px;
+  padding-right: 10px;
   font-weight: 1000;
   font-size: 1.35rem;
   float: left;
@@ -22,7 +23,17 @@ body{
 }
 .header #logo span{
   font-weight: 300;
-    font-size: 1.20rem;
+  font-size: 1.20rem;
+}
+.header #user {
+  padding: 0;
+  margin: 0;
+  float: left;
+  font-size: 1.35rem;
+  letter-spacing: -1px;
+  font-weight: 300;
+  font-size: 20px;
+
 }
 .header nav{
   float: right;
@@ -100,23 +111,25 @@ body{
   text-align: center;
 }
 .side-nav {
-  padding: 20px 5px auto 10px;
   background: rgba(250, 250, 250, 0.3);
-  width: 10%;
+  width: 20%;
   height: 300px;
   display: inline-block;
   vertical-align: top;
 }
-
+.side-nav-choice {
+  padding-top: 20px;
+}
 .thumbies {
-  padding: px;
+  padding-left: 30px;
+  text-align: left;
   background: rgba(250, 250, 250, 0.3);
-  width: 80%;
+  width: 70%;
   display: inline-block;
 }
 
-/*login styles*/
-.login {
+/*login and signup and single post display styles*/
+.login , .signup {
   background-image: url(/stylesheets/nicecream.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -131,6 +144,7 @@ body{
   font-weight: 300;
 }
 .forms {
+  color: white;
   margin: 0 auto;
   width: 80%;
   height: 100%;
@@ -145,6 +159,42 @@ input[type="textarea"] , input[type="password"] {
   width: 50%;
   height: 30px;
   font-size: 28px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+}
+
+/*new and edit styles*/
+.borang {
+  padding-left: 50px;
+  color: white;
+  /*background-color: pink;*/
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  height:600px;
+}
+.form_area {
+  text-align: left;
+}
+.borang h2 {
+  margin: 0;
+  padding-top: 20px;
+}
+input[type="textarea-version2"]{
+  text-align: left;
+  width: 60%;
+  font-size: 20px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+}
+
+textarea {
+  height: 300px;
+  width: 60%;
+  font-size: 20px;
   appearance: none;
   box-shadow: none;
   border-radius: none;
