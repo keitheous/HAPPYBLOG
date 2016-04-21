@@ -1,6 +1,4 @@
 <div class="show">
-  <div class="">
-  </div>
   <div class="contents">
     <div class="side-nav">
       <div class="side-nav-choice">
@@ -9,30 +7,26 @@
             <button class="button_1"> New Post </button>
           </form>
         <% else %>
-        <form action="/user/login">
-          <button class="button_1"> Log In </button>
-        </form>
+          <form action="/user/login">
+            <button class="button_1"> Log In </button>
+          </form>
         <% end %>
       </div>
-      <div class="side-nav-choice">
-        <label for="">Tags: </label>
-        <input type = "text" name="title" value=""><br>
-      </div>
-    </div>
 
-    <div class="thumbies">
+    </div>
+    <div class="board">
       <h2> Story Board : </h2>
-      <div class="tiles">
-      <% @posts.each do |post| %>
-        <p><a href="/posts/<%= post.id %>"><%= post.title %></a></p>
-         <% @users.each do |user| %>
-           <% if user.id == post.user_id%>
-           <p> Name: <%= user.name %></p>
+        <% @posts.each do |post| %><a href="/posts/<%= post.id %>">
+        <div class="tiles">
+          <p><span id="post_title"><%= post.title %></span></p>
+           <% @users.each do |user| %>
+             <% if user.id == post.user_id%>
+             <p><span id=user_name> By: <%= user.name %></span></p>
+             <% end %>
            <% end %>
-         <% end %>
-        <p> <%= post.body %></p>
-      <% end %>
-      </div>
+          <!-- <p> <%= post.body %></p> -->
+        </div></a>
+        <% end %>
     </div>
-
+  </div>
 </div>

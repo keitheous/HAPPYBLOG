@@ -1,16 +1,14 @@
-<h1>Delete Page</h1>
-
-<h2> Are you sure you want to delete the entry below? </h2>
-
-<p><b> Title : <%= @post.title %></b></p>
-<p><b> Post: </b></p>
-<p> <%= @post.body %></p>
-
-<form action="/delete/<%= @post.id %>" method="post">
-  <input type="hidden" value="delete" name="_method">
-  <button> YES </button>
-</form>
-
-</form><form action="/posts/<%= @post.id %>">
-<button> NO </button>
-</form>
+<div class="show_single_content">
+  <h2> Are you sure you want to delete the entry below? </h2>
+  <div class="show_single_content_body">
+    <form action="/delete/<%= @post.id %>" method="post">
+      <input type="hidden" value="delete" name="_method">
+      <button id="float_right_button">Discard</button>
+    </form>
+    <button id="float_right_button"><a href="/posts/<%= @post.id %>">Keep</a></button>
+  </div>
+  <h1> <%= @post.title %> </h1>
+  <div class="show_single_content_body">
+    <p><%= @post.body %></p>
+  </div>
+</div>

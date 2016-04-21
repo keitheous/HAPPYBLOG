@@ -1,23 +1,36 @@
 <div class="show_single_content">
   <h1> <%= @post.title %> </h1>
-  <div class="show_single_content_subtitle">
-    <span id="written_by"> Written by: <%= @poster.name %></span>
+  <div class="show_left_half">
+    <div class="show_single_content_subtitle">
+      <span id="written_by"> Written by: <%= @poster.name %></span>
+      <% if logged_in? %>
+        <% if @post.user_id == @current.id %>
+          <span id="float_right_button"><a href="/delete/<%= @post.id %>"> Delete </a></span>
+          <span id="float_right_button"><a href="/posts/<%= @post.id %>/edit"> Edit </a></span>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="show_single_content_body">
+      <p><%= @post.body %></p>
+    </div>
+    <div class="show_single_content_body">
+      <form action="/posts">
+        <button class="button_1"> Story Board </button>
+      </form>
+    </div>
+  </div>
+  <div class="show_right_half">
 
-    <% if logged_in? %>
-      <% if @post.user_id == @current.id %>
-        <span id="float_right_button"><a href="/delete/<%= @post.id %>"> Delete </a></span>
-        <span id="float_right_button"><a href="/posts/<%= @post.id %>/edit"> Edit </a></span>
+    <% if @comments.count == 0 %>
+    <p> Be the first to comment </p>
+    <% else %>
+      <% @comments.each do |comment| %>
+        billy:
+        <%= comment.body %> <br>
+        <%= @commenter.name %> :
+          <%= comment.body %> <br>
       <% end %>
     <% end %>
-  </div>
-  <div class="show_single_content_body">
-    <p><%= @post.body %></p>
-  </div>
-  <div class="show_single_content_body">
-    <form action="/posts">
-      <button class="button_1"> Story Board </button>
-    </form>
-  </div>
 
-
+  </div>
 </div>

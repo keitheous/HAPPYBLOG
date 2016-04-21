@@ -28,11 +28,15 @@ end
 get '/' do
   erb :index
 end
+
+get '/about' do
+  erb :about
+end
 # ========================
 # ========================
 # ADD NEW POST (Create)
 # renders form - method post - redirected
-# ========================
+# ========================p
 # ========================
 get '/posts/new' do
   if !(logged_in?)
@@ -47,9 +51,12 @@ post '/posts' do
     redirect to '/user/login'
   else
     @post = Post.new
-    @post.title = params[:title]
+    if (!params[:title].present?)
+      @post.title = "Happily Untitled"
+    else
+      @post.title = params[:title]
+    end
     @post.user_id = current_user.id
-    # @post.name  = current_user.id
     @post.body = params[:body]
     @post.save
     redirect to '/posts'
@@ -108,9 +115,20 @@ get '/posts' do
 end
 
 get '/posts/:id' do
+  # this part is for posts
   @post = Post.find(params[:id])
   @poster = User.find(@post.user_id)
   @current = current_user
+  # this part is for comments
+  # @comments = Comment.where(post_id: 17)
+  @comments = Comment.where(post_id: @post.id)
+  @commenter = User.find(@comments.user_id)
+
+
+
+
+
+
   erb :showsingle
 end
 
@@ -146,7 +164,6 @@ end
 post '/user' do
   # if user by email
   user = User.find_by(email: params[:email])
-  puts user
   # if user email and password exist - log in, else do nothing
   if user && user.authenticate(params[:password])
     session[:user_id] = user.id
@@ -160,28 +177,46 @@ end
 get '/user/signup' do
   erb :signup
 end
-
 post '/user/new' do
-  user = User.new
-  user.name = params[:name]
-  user.email = params[:email]
-  user.password = params[:password]
-  if user.save
-    redirect to '/posts'
-  else
-    erb :signup
-  end
+  @user = User.new
+  @user.name = params[:name]
+  @user.email = params[:email]
+  @user.password = params[:password]
+  @user.save
+  session[:user_id] = @user.id
+  redirect to '/posts'
 end
 
-#User Edit
-# get '/user/profile' do
-#   @user = User.all
-#   erb :profileEdit
-# end
-
-
+# User Edit
+get '/user/profile' do
+  if (logged_in?)
+    @user = User.find_by(name: current_user.name)
+    erb :profiledit
+  else
+    redirect '/posts'
+  end
+end
+patch '/user' do
+  @user = User.find_by(name: current_user.name)
+  if (logged_in?)
+    @user.name = params[:name]
+    @user.email = params[:email]
+    @user.password = params[:password]
+    @user.save
+    redirect '/user/profile'
+  else
+    redirect '/user/signup'
+  end
+end
 #User Log out
 get '/user/logout' do
   session[:user_id] = nil
   redirect to '/'
+end
+#DELETE USER!!!!
+get "/user/delete" do
+  @user = User.find_by(name: current_user.name)
+  @user.destroy
+  redirect to "/posts"
+
 end

@@ -12,7 +12,7 @@
     <p id="user">
 
     <% if logged_in? %>
-      <%= current_user.name %>
+      <a href="/user/profile"><%= current_user.name %></a>
     <% else %>
     <% end %>
 
@@ -20,13 +20,11 @@
     <nav>
       <a href="/">Home</a>
       <a href="/posts">Stories</a>
-      <a href="#">Contact</a>
+      <a href="/about">Contact</a>
       <% if !logged_in? %>
         <a href="/user/login">Login</a>
       <% else %>
         <a href="/user/logout">Logout</a>
-
-
       <% end %>
 
     </nav>
