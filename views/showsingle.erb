@@ -3,6 +3,8 @@
   <div class="show_left_half">
     <div class="show_single_content_subtitle">
       <span id="written_by"> Written by: <%= @poster.name %></span>
+      <span id="time">Posted on <%= @post.post_time.localtime.strftime("%d/%m/%Y at %I:%M%p")%></span>
+
       <% if logged_in? %>
         <% if @post.user_id == @current.id %>
           <span id="float_right_button"><a href="/delete/<%= @post.id %>"> Delete </a></span>
@@ -25,11 +27,30 @@
     <p> Be the first to comment </p>
     <% else %>
       <% @comments.each do |comment| %>
-        billy:
-        <%= comment.body %> <br>
-        <%= @commenter.name %> :
-          <%= comment.body %> <br>
+        <div id="comment_border">
+
+          <span id="comment_user"><%= @commenter.find_by(id: comment.user_id).name %> : </span>
+            <% if (logged_in?) && (current_user.id == comment.user_id) %>
+              <button id="comment_delete_button"><a href="/posts/<%= @post.id %>/delete/comment/<%= comment.id %>">DEL</a></button>
+            <% end %>
+          <span id="comment_body"><%= comment.body %></span>
+
+        </div>
       <% end %>
+
+    <% end %>
+
+    <% if logged_in? %>
+    <form action="/posts/<%= @post.id %>/comment" method="post">
+        <input type="hidden" value="patch" name="_method">
+      <label for=""></label><br>
+      <textarea id="new_comment" name="new_comment" class="textarea" placeholder="add a new comment here"></textarea>
+      <button id="comment_submit_button">Comment</button>
+    </form>
+
+    <% else %>
+    <p> Log in to comment </p>
+        <button class="button_1"><a href="/user/login"> Log In </a></button>
     <% end %>
 
   </div>

@@ -8,6 +8,7 @@
     <button id="float_right_button"><a href="/posts/<%= @post.id %>">Keep</a></button>
   </div>
   <h1> <%= @post.title %> </h1>
+  <span id="time">Posted on <%= @post.post_time.localtime.strftime("%d/%m/%Y at %I:%M%p")%></span>
   <div class="show_single_content_body">
     <p><%= @post.body %></p>
   </div>

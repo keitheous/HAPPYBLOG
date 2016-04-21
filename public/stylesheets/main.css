@@ -47,16 +47,17 @@ body{
 /*Index Styles*/
 .index{
   padding: 5rem 0 6rem 0;
-  background-image: url(/stylesheets/nbanner.jpeg);
+  background-image: url(/stylesheets/pexels-photo.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  height:400px;
+  height:450px;
   max-height: 80%;
   text-align: center;
   color: white;
 }
 
 .title {
+  text-shadow: 2px 2px #C0C0C0;
   font-size: 5.5rem;
   font-weight: 300;
   letter-spacing: -1px;
@@ -64,6 +65,7 @@ body{
   padding-bottom: 5rem;
 }
 .sub_title {
+  text-shadow: 1px 1px #C0C0C0;
   text-align: center;
   font-weight: 500;
   font-size: 1.35rem;
@@ -100,8 +102,8 @@ body{
 
 .show {
   color: white;
-  background-color: brown;
-  background-image: url(/stylesheets/nbackgroundposts.jpeg);
+  background-color: #545454;
+  background-image: url(/stylesheets/pexels-photo2.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -115,7 +117,7 @@ body{
   text-align: center;
 }
 .side-nav {
-  background: rgba(128, 128, 128, 0.8);
+  background: rgba(250, 250, 250, 0.6);
   width: 15%;
   height: 300px;
   display: inline-block;
@@ -129,9 +131,14 @@ body{
 .board {
   padding-left: 30px;
   text-align: center;
-  background: rgba(128, 128, 128, 0.8);
+  background: rgba(250, 250, 250, 0.6);
   width: 75%;
   display: inline-block;
+}
+
+.board h2{
+  font-size: 2rem;
+  text-shadow: 2px 2px #C0C0C0;
 }
 .tiles {
   float: left;
@@ -142,14 +149,17 @@ body{
   max-width: 225px;
   min-height: 225px;
   max-height: 225px;
-  border-style: groove;
+  border: 1px groove #202020;
+  background: rgba(128, 128, 128, 0.75);
 }
 #post_title {
+
   padding: 0;
   margin: 0;
-  font-size: 40px;
+  font-size: 20px;
   vertical-align: top;
   color: #F0F8FF
+  text-align: justify;
 ;
 }
 
@@ -209,25 +219,80 @@ body{
   padding: 0 40px 20px 40px;
 }
 .show_left_half{
+  float: left;
   width: 65%;
   display: inline-block;
   vertical-align: top;
 }
 .show_right_half{
+  float: right;
+  padding-left: 30px;
+  padding-top: 30px;
+  padding-right: 30px;
   background-color: yellow;
   width: 30%;
   display: inline-block;
+  border-left: solid;
+  border-left-style:dashed;
+
 }
+.show_right_half #comment_border{
+  margin-top: 10px;
+  border-style: outset;
+}
+
+.show_right_half #comment_user {
+  font-size: 1rem;
+  color: plum;
+  font-weight: bold;
+  text-decoration: underline;
+  text-align: left;
+  display: inline-block;
+  float: left;
+}
+
+.show_right_half #comment_body {
+  font-weight: bold;
+  text-align: justify;
+  display: block;
+  padding: 30px 10px 0px 10px;
+}
+
+.show_right_half #new_comment {
+  width: 375px;
+  height: 100px;
+}
+.show_right_half #comment_delete_button, #comment_submit_button{
+  float: right;
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+  padding: 0 20px;
+  text-decoration: none;
+  background: rgba(128, 128, 128, 0.8);
+  color: white;
+}
+
+.show_right_half #comment_delete_button a{
+  color: red;
+}
+
 .show_single_content h1 {
   margin: 0;
   font-size: 60px;
   padding-top: 50px;
-  padding-bottom: 20px;
+  padding-bottom: 0;
 }
 .show_single_content #written_by {
   float: left;
   display: inline-block;
 }
+.show_single_content #time {
+  float: left;
+  display: inline-block;
+  padding-left: 30px;
+}
+
 .show_single_content #float_right_button {
   float: right;
   display: inline-block;

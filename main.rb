@@ -5,6 +5,7 @@ require './models/post'
 require './models/user'
 require './models/comment'
 require './models/tag'
+require 'pry'
 enable :sessions
 # filter to close connection after
 helpers do
@@ -16,7 +17,6 @@ helpers do
   def logged_in?
     !!current_user
   end
-
 end
 
 after do
@@ -54,11 +54,13 @@ post '/posts' do
     if (!params[:title].present?)
       @post.title = "Happily Untitled"
     else
-      @post.title = params[:title]
+      @post.title = params[:title].to_s
     end
+    @post.post_time = Time.now
     @post.user_id = current_user.id
     @post.body = params[:body]
     @post.save
+    @edited = false
     redirect to '/posts'
   end
 end
@@ -86,9 +88,10 @@ patch '/posts/:id' do
   elsif @post.user_id != current_user.id
     redirect to '/posts'
   else
-    @post.title = params[:title]
+    @post.title = params[:title].to_s
     @post.body = params[:body]
     @post.save
+    @edited = true
     redirect to '/posts'
   end
 end
@@ -122,13 +125,7 @@ get '/posts/:id' do
   # this part is for comments
   # @comments = Comment.where(post_id: 17)
   @comments = Comment.where(post_id: @post.id)
-  @commenter = User.find(@comments.user_id)
-
-
-
-
-
-
+  @commenter = User.all
   erb :showsingle
 end
 
@@ -143,8 +140,14 @@ end
 
 delete '/delete/:id' do
   @post = Post.find(params[:id])
+  @comments = Comment.where(post_id: @post.id)
   if @post.present?
-    @post.destroy
+      @post.destroy
+    if @comments.present?
+        @comments.each do |comment|
+          comment.destroy
+        end
+    end
   end
   redirect to '/posts'
 end
@@ -183,8 +186,28 @@ post '/user/new' do
   @user.email = params[:email]
   @user.password = params[:password]
   @user.save
+
   session[:user_id] = @user.id
+
   redirect to '/posts'
+end
+
+# Comments part
+patch "/posts/:id/comment" do
+  comment = Comment.new
+  comment.post_id = params[:id]
+  comment.user_id = current_user.id
+  comment.body = params[:new_comment]
+  comment.save
+  redirect to "/posts/#{params[:id]}"
+end
+
+get "/posts/:postid/delete/comment/:commentid" do
+  comment_id = params[:commentid]
+  comment = Comment.find(comment_id)
+  comment.destroy
+  redirect to "/posts/#{params[:postid]}"
+
 end
 
 # User Edit
@@ -218,5 +241,4 @@ get "/user/delete" do
   @user = User.find_by(name: current_user.name)
   @user.destroy
   redirect to "/posts"
-
 end
