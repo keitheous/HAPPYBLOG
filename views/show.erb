@@ -11,11 +11,13 @@
             <button class="button_1"> Log In </button>
           </form>
         <% end %>
+        <div class="show_quotes">
+          <span id="mini_quote">a</span>
+        </div>
       </div>
-
     </div>
     <div class="board">
-      <h2> Story Board </h2>
+      <h2> ~Story Board~ </h2>
         <% @posts.each do |post| %><a href="/posts/<%= post.id %>">
         <div class="tiles">
           <p><span id="post_title"><%= post.title %></span></p>
@@ -30,3 +32,5 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript" src="/javascripts/application2.js"></script>

@@ -4,7 +4,7 @@
     <div class="show_left_half">
       <div class="show_single_content_subtitle">
         <span id="written_by"> Written by: <%= @poster.name %></span>
-        <span id="time">Posted on <%= @post.post_time.localtime.strftime("%d/%m/%Y at %I:%M%p")%></span>
+        <span id="time"><%= @post.post_time.localtime.strftime("%d.%m.%Y / %I:%M%p")%></span>
 
         <% if logged_in? %>
           <% if @post.user_id == @current.id %>
@@ -51,7 +51,7 @@
 
       <% else %>
       <p> Log in to comment </p>
-          <button class="button_1"><a href="/user/login"> Log In </a></button>
+          <a href="/user/login"><button class="button_1">Log In</button></a>
       <% end %>
 
     </div>

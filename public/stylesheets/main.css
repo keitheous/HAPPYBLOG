@@ -46,6 +46,21 @@ body{
   margin-right: 2rem;
 }
 /*Index Styles*/
+#quoteDisplay{
+  font-family: 'Bitter', serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  text-shadow: 2px 2px #00008B;
+  color: white;
+}
+#authorDisplay{
+  padding-top: 0;
+  font-family: 'Bitter', serif;
+  font-size: 1rem;
+  font-style: italic;
+  text-shadow: 2px 2px #00008B;
+  color: white;
+}
 .index{
   padding: 5rem 0 6rem 0;
   background-image: url(/stylesheets/backgroundposts.jpeg);
@@ -55,6 +70,7 @@ body{
   max-height: 80%;
   text-align: center;
   color: white;
+  display: float;
 }
 
 .title {
@@ -63,7 +79,7 @@ body{
   font-weight: 300;
   letter-spacing: -1px;
   margin: 0;
-  padding-bottom: 5rem;
+  padding-bottom: 20px;
 }
 .sub_title {
   text-shadow: 1px 1px #C0C0C0;
@@ -109,8 +125,9 @@ body{
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-  max-height:650px;
   min-height:650px;
+  width: 100%;
+  float: left;
 }
 
 .contents {
@@ -120,17 +137,26 @@ body{
 .side-nav {
   background: rgba(250, 250, 250, 0.6);
   width: 15%;
-  height: 300px;
   display: inline-block;
   vertical-align: top;
   font-weight: 300;
   letter-spacing: -1px;
+  position: fixed;
+  left:2px;
 }
+.show_quotes{
+  background: rgba(250, 250, 250, 0.6);
+  text-shadow: 2px 2px white;
+  padding-top: 60px;
+  font-size: 1.85rem;
+  color: black;
+}
+
 .side-nav-choice {
   padding-top: 20px;
 }
 .board {
-  padding-left: 30px;
+  padding-left:80px;
   text-align: center;
   background: rgba(250, 250, 250, 0.6);
   width: 75%;
@@ -219,19 +245,23 @@ body{
   background-position: center;
   min-height:650px;
   padding: 0 40px 20px 40px;
-
+  float: left;
+  overflow: auto;
+  width: 100%;
 }
 .overall_left {
   background: rgba(255, 255, 255, 0.3);
-  height: 800px;background: rgba(255, 255, 255, 0.3);
+  height: 800px;
+  overflow: auto;
 }
 .show_left_half{
-  float: left;
+  float: fixed;
   width: 65%;
   display: inline-block;
   vertical-align: top;
   background: rgba(255, 255, 255, 0.3);
 }
+
 .show_right_half{
   float: right;
   padding-left: 30px;
@@ -302,7 +332,7 @@ body{
 .show_single_content #time {
   float: left;
   display: inline-block;
-  padding-left: 30px;
+  padding-left: 40px;
   font-style: italic;
 }
 
@@ -321,10 +351,36 @@ body{
   background: rgba(128, 128, 128, 0.8);
   margin: 0 0.8rem;
 }
+.buttons{
+  padding-right: 50%;
+}
+.show_single_content #float_right_button_2 {
+  float: right;
+  display: inline-block;
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+  padding: .6rem 3.5rem;
+  color: white;
+  font-size:15px;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: left;
+  background: rgba(128, 128, 128, 0.8);
+  margin: 0 0.8rem;
+}
+
 .show_single_content #float_right_button a {
   color: white;
   text-decoration: none;
 }
+/*#float_right_button_2 a {
+  padding-right: 100px;
+  color: pink;
+  text-decoration: none;
+}*/
+
+
 .show_single_content_body{
   padding-left: 10px;
   padding-right: 10px;
@@ -332,6 +388,7 @@ body{
   font-size: 800;
   padding-top: 30px;
   display: block;
+
 }
 /*delete page*/
 .show_single_content h2 {

@@ -1,11 +1,13 @@
 <div class="show_single_content">
   <h2> Are you sure you want to delete the entry below? </h2>
   <div class="show_single_content_body">
-    <form action="/delete/<%= @post.id %>" method="post">
-      <input type="hidden" value="delete" name="_method">
-      <button id="float_right_button">Discard</button>
-    </form>
-    <button id="float_right_button"><a href="/posts/<%= @post.id %>">Keep</a></button>
+    <div class = "buttons">
+      <form action="/delete/<%= @post.id %>" method="post">
+        <input type="hidden" value="delete" name="_method">
+        <button id="float_right_button_2">Discard</button>
+      </form>
+      <a href="/posts/<%= @post.id %>"><button id="float_right_button_2">Keep</button></a>
+    </div>
   </div>
   <h1> <%= @post.title %> </h1>
   <span id="time">Posted on <%= @post.post_time.localtime.strftime("%d/%m/%Y at %I:%M%p")%></span>
