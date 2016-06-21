@@ -1,0 +1,18 @@
+<h1> Displaying just one post </h1>
+<p><b> Title : <%= @post.title %></b></p>
+<p><b> Username:</b> <%= @post.name %></p>
+<p><b> Post: </b></p>
+<p> <%= @post.body %></p>
+
+<!-- <a href="/posts"> << Back </a> -->
+
+<form action="/posts">
+<button> << Back </button>
+</form>
+<!-- <a href="/posts/<%= @post.id %>/edit"> Edit </a> -->
+<form action="/posts/<%= @post.id %>/edit">
+<button> Edit </button>
+
+</form><form action="/delete/<%= @post.id %>">
+<button> Delete </button>
+</form>
