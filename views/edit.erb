@@ -1,14 +1,18 @@
-<h1> FORM to edit pre existing page </h1> <br>
+<div class="borang">
+  <div class="form_area">
+    <h2> Change your Happy Story<h2> <br>
 
-<form action="/posts/<%= @post.id %>" method="post">
-  <input type="hidden" value="patch" name="_method">
+    <form action="/posts/<%= @post.id %>" method="post">
+      <input type="hidden" value="patch" name="_method">
 
-  <label for="">Title : </label>
-  <input type = "text" name="title" value="<%= @post.title %>"><br>
-  <label for="">Username : </label>
-  <%= @post.name %> <br>
-  <label for="">Body : </label>
-  <input type = "text" name="body" value="<%= @post.body %>">
-  <br>
-  <button> Update! </button>
-</form>
+      <label for="">Title : </label><br>
+      <input class="titletext"  type = "text" name="title" value="<%= @post.title %>"><br>
+
+      <label for="">Body : </label><br>
+      <textarea name="body" class="textarea"><%= @post.body %></textarea>
+
+      <button class="button_2"> Update Post </button>
+
+    </form>
+  </div>
+</div>

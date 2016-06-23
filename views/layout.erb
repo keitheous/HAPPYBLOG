@@ -2,11 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Hello World</title>
+  <title>SuperDuperHappy</title>
+
   <link rel='stylesheet' href='/stylesheets/main.css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Bitter:700' rel='stylesheet' type='text/css'>
 </head>
 <body>
+  <div class="header">
+    <p id="logo">Super<span>Duper</span>Happy</p>
+    <p id="user">
 
+    <% if logged_in? %>
+      <a href="/user/profile"><%= current_user.name %></a>
+    <% else %>
+    <% end %>
+
+    </p>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/posts">Stories</a>
+      <a href="/about">Contact</a>
+      <% if !logged_in? %>
+        <a href="/user/login">Login</a>
+      <% else %>
+        <a href="/user/logout">Logout</a>
+      <% end %>
+
+    </nav>
+  </div>
   <%= yield %>
-
 </body>

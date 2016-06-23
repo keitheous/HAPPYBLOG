@@ -1,12 +1,36 @@
-<h1> Displaying all Posts: </h1>
-</form><form action="/posts/new">
-<button> New Post </button>
-</form>
-<br>
-<% @posts.each do |post| %>
-  <p><a href="/posts/<%= post.id %>"><b> Post Title : <%= post.title %></b></a></p>
-  <p> Username: <%= post.name %></p>
-  <p> Post: </p>
-  <p> <%= post.body %></p>
-  <br>
-<% end %>
+<div class="show">
+  <div class="contents">
+    <div class="side-nav">
+      <div class="side-nav-choice">
+        <% if logged_in? %>
+          <form action="/posts/new">
+            <button class="button_1"> New Post </button>
+          </form>
+        <% else %>
+          <form action="/user/login">
+            <button class="button_1"> Log In </button>
+          </form>
+        <% end %>
+        <div class="show_quotes">
+          <span id="mini_quote">a</span>
+        </div>
+      </div>
+    </div>
+    <div class="board">
+      <h2> ~Story Board~ </h2>
+        <% @posts.each do |post| %><a href="/posts/<%= post.id %>">
+        <div class="tiles">
+          <p><span id="post_title"><%= post.title %></span></p>
+           <% @users.each do |user| %>
+             <% if user.id == post.user_id%>
+             <p><span id=user_name> By: <%= user.name %></span></p>
+             <% end %>
+           <% end %>
+          <!-- <p> <%= post.body %></p> -->
+        </div></a>
+        <% end %>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="/javascripts/application2.js"></script>

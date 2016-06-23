@@ -1,18 +1,59 @@
-<h1> Displaying just one post </h1>
-<p><b> Title : <%= @post.title %></b></p>
-<p><b> Username:</b> <%= @post.name %></p>
-<p><b> Post: </b></p>
-<p> <%= @post.body %></p>
+<div class="show_single_content">
+  <div class="overall_left">
+    <h1> <%= @post.title %> </h1>
+    <div class="show_left_half">
+      <div class="show_single_content_subtitle">
+        <span id="written_by"> Written by: <%= @poster.name %></span>
+        <span id="time"><%= @post.post_time.localtime.strftime("%d.%m.%Y / %I:%M%p")%></span>
 
-<!-- <a href="/posts"> << Back </a> -->
+        <% if logged_in? %>
+          <% if @post.user_id == @current.id %>
+            <span id="float_right_button"><a href="/delete/<%= @post.id %>"> Delete </a></span>
+            <span id="float_right_button"><a href="/posts/<%= @post.id %>/edit"> Edit </a></span>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="show_single_content_body">
+        <p><%= @post.body %></p>
+      </div>
+      <div class="show_single_content_body">
+        <form action="/posts">
+          <button class="button_1"> Story Board </button>
+        </form>
+      </div>
+    </div>
+    <div class="show_right_half">
 
-<form action="/posts">
-<button> << Back </button>
-</form>
-<!-- <a href="/posts/<%= @post.id %>/edit"> Edit </a> -->
-<form action="/posts/<%= @post.id %>/edit">
-<button> Edit </button>
+      <% if @comments.count == 0 %>
+      <p> Be the first to comment </p>
+      <% else %>
+        <% @comments.each do |comment| %>
+          <div id="comment_border">
 
-</form><form action="/delete/<%= @post.id %>">
-<button> Delete </button>
-</form>
+            <span id="comment_user"><%= @commenter.find_by(id: comment.user_id).name %> : </span>
+              <% if (logged_in?) && (current_user.id == comment.user_id) %>
+                <button id="comment_delete_button"><a href="/posts/<%= @post.id %>/delete/comment/<%= comment.id %>">DEL</a></button>
+              <% end %>
+            <span id="comment_body"><%= comment.body %></span>
+
+          </div>
+        <% end %>
+
+      <% end %>
+
+      <% if logged_in? %>
+      <form action="/posts/<%= @post.id %>/comment" method="post">
+          <input type="hidden" value="patch" name="_method">
+        <label for=""></label><br>
+        <textarea id="new_comment" name="new_comment" class="textarea" placeholder="add a new comment here"></textarea>
+        <button id="comment_submit_button">Comment</button>
+      </form>
+
+      <% else %>
+      <p> Log in to comment </p>
+          <a href="/user/login"><button class="button_1">Log In</button></a>
+      <% end %>
+
+    </div>
+  </div>
+</div>

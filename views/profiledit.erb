@@ -1,0 +1,24 @@
+<div class="signup">
+  <div class="forms">
+    <h2>Happy User Profile</h2>
+    <form action = "/user" method="post">
+      <input type="hidden" value="patch" name="_method">
+
+        <label for=""> Email: </label>
+        <input class="email" type="email" name="email" value="<%= @user.email %>">
+
+        <label for=""> Name: </label>
+        <input class ="name" type="text" name="name" value="<%= @user.name %>">
+
+        <label for=""> Password: </label>
+        <input class ="password" type="text" name="password" value="<%= @user.password %>" placeholder = "*****************">
+
+        <button class="button_1"> Save Profile </button>
+    </form>
+    <br>
+    <a href="/user/logout"><button class="button_1">Log Out</button></a>
+    <br>
+    <br>
+    <a href="/user/delete"><button class="button_1">Delete Profile</button></a>
+  </div>
+</div>
